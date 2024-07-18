@@ -1,6 +1,9 @@
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+    const session = await getServerSession(authOptions);
     return (
         <main className="flex-1 flex flex-col">
             <div className="container flex-grow">
@@ -12,12 +15,21 @@ export default function Home() {
                         From information overload to actionable insights in
                         seconds
                     </h3>
-                    <Link
-                        href={"/signin"}
-                        className="bg-primary text-white px-2 py-2 rounded-md"
-                    >
-                        Login to get started
-                    </Link>
+                    {session?.user?.username ? (
+                        <Link
+                            href={"/home"}
+                            className="bg-primary text-white px-2 py-2 rounded-md"
+                        >
+                            Analyze your document here
+                        </Link>
+                    ) : (
+                        <Link
+                            href={"/signin"}
+                            className="bg-primary text-white px-2 py-2 rounded-md"
+                        >
+                            Login to get started
+                        </Link>
+                    )}
                 </div>
             </div>
         </main>

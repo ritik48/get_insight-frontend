@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 
 export default function Signin() {
@@ -18,7 +19,18 @@ export default function Signin() {
                     <div className="w-full flex flex-col gap-2">
                         <Input placeholder="Username" />
                         <Input placeholder="Password" type="password" />
-                        <Button className="mt-3">Login</Button>
+                        <Button
+                            className="mt-3"
+                            onClick={() =>
+                                signIn("credentials", {
+                                    username: "ritik48",
+                                    password: "12458",
+                                    callbackUrl: "/home",
+                                })
+                            }
+                        >
+                            Login
+                        </Button>
                         <Link
                             href={"/signup"}
                             className="text-left text-sm hover:underline mt-1"
