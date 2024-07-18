@@ -13,7 +13,7 @@ export default function Home() {
                         seconds
                     </h3>
                     <Link
-                        href={"#"}
+                        href={"/signin"}
                         className="bg-primary text-white px-2 py-2 rounded-md"
                     >
                         Login to get started
