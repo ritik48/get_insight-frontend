@@ -1,26 +1,40 @@
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { authOptions } from "@/lib/authOptions";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+"use client";
+
 import { Result } from "./components/result";
 import { DataForm } from "./components/DataForm";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-export default async function Home() {
-    const session = await getServerSession(authOptions);
+export default function Home() {
+    const session = useSession();
+    const router = useRouter();
 
-    if (!session?.user?.username) {
-        redirect("/");
+    const [result, setResult] = useState<{
+        summary?: string;
+        sentiment?: string;
+        keywords?: string;
+    }>();
+
+    const isLoading = session.status === "loading";
+    const isAuthenticated = session.status === "authenticated";
+
+    if (isLoading) return null;
+    if (!isAuthenticated) {
+        router.push("/");
     }
+
+    console.log(result);
+
     return (
         <section className="h-full">
             <div className="container flex flex-col h-full">
                 <div className="my-16 flex-grow flex flex-col sm:flex-row items-start gap-6">
-                    <DataForm />
+                    <DataForm setResult={setResult} />
                     <Result
-                        summary="weffew"
-                        sentiment="positive"
-                        keywords={["abdc", "mklo"]}
+                        summary={result?.summary}
+                        sentiment={result?.sentiment}
+                        keywords={result?.keywords}
                     />
                 </div>
             </div>

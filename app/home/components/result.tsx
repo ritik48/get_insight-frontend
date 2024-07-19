@@ -1,14 +1,16 @@
 import { Textarea } from "@/components/ui/textarea";
 
 type ResultProps = {
-    summary: string;
-    sentiment: string;
-    keywords: string[];
+    summary?: string;
+    sentiment?: string;
+    keywords?: string;
 };
 
 const keywords = ["country", "jobs", "population", "inflation"];
 
 export function Result({ summary, sentiment, keywords }: ResultProps) {
+    const keywords_list = keywords?.split("\n").map((k) => k.slice(2));
+
     return (
         <div className="flex-1 flex flex-col sm:h-full gap-5 w-full sm:w-auto">
             <div className="h-[200px] sm:h-[60%] flex flex-col gap-3">
@@ -30,7 +32,7 @@ export function Result({ summary, sentiment, keywords }: ResultProps) {
                 <div className="space-y-2">
                     <h3 className="font-semibold">Keywords</h3>
                     <div className="font-semibold flex gap-3">
-                        {keywords.map((k, index) => (
+                        {keywords_list?.map((k, index) => (
                             <span
                                 key={index}
                                 className="bg-zinc-800 text-zinc-100 rounded-md px-2 py-1"

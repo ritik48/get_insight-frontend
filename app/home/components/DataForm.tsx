@@ -12,6 +12,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -19,7 +20,16 @@ const formSchema = z.object({
     text: z.string().min(40, "Text must be atleast 40 character"),
 });
 
-export function DataForm() {
+export function DataForm({
+    setResult,
+}: {
+    setResult: React.Dispatch<
+        React.SetStateAction<
+            | { summary?: string; sentiment?: string; keywords?: string }
+            | undefined
+        >
+    >;
+}) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -27,8 +37,20 @@ export function DataForm() {
         },
     });
 
+    const isSubmitting = form.formState.isSubmitting;
+
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log("values = ", values);
+        const res = await fetch("/api/analyze", {
+            method: "POST",
+            body: JSON.stringify({ text: values.text }),
+            headers: {
+                "Content-type": "application/json",
+            },
+        });
+
+        const data = await res.json();
+
+        setResult(data.data);
     };
     return (
         <Form {...form}>
@@ -55,7 +77,9 @@ export function DataForm() {
                     )}
                 />
 
-                <Button className="mt-2 w-fit">Upload</Button>
+                <Button className="mt-2 w-fit" disabled={isSubmitting}>
+                    {isSubmitting ? "Submitting" : "Upload"}
+                </Button>
             </form>
         </Form>
     );
