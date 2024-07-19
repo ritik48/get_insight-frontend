@@ -1,5 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { connectDb } from "./db";
+import { User } from "@/app/_models/user";
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -8,10 +10,11 @@ export const authOptions: NextAuthOptions = {
             name: "Credentials",
             // @ts-ignore
             async authorize(credentials: any) {
-                console.log("credentials = ", credentials);
                 const { username, password } = credentials;
 
-                const user = { username, password };
+                await connectDb();
+
+                const user = await User.findOne({ username, password });
 
                 if (user) {
                     return user;
