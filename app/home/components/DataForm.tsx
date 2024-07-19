@@ -17,6 +17,7 @@ import { formSchema } from "@/lib/formSchemaValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 export function DataForm({
@@ -54,7 +55,9 @@ export function DataForm({
 
         const data = await res.json();
 
-        setResult(data.data);
+        if (!data.success) {
+            toast.error(data.message || "Something went wrong");
+        } else setResult(data.data);
     };
     const fileRef = form.register("file_data");
     return (
@@ -132,44 +135,6 @@ export function DataForm({
                 <Button className="w-fit mt-2" disabled={isSubmitting}>
                     {isSubmitting ? "Submitting" : "Upload"}
                 </Button>
-                {/* 
-                
-                <FormField
-                    control={form.control}
-                    name="text"
-                    render={({ field }) => (
-                        <FormItem className="h-full sm:h-[60%] flex flex-col gap-1">
-                            <FormLabel className="text-lg sm:text-xl font-semibold text-foreground">
-                                Write text or upload file to analyse
-                            </FormLabel>
-                            <FormControl>
-                                <Textarea
-                                    {...field}
-                                    className="transition-all w-full h-full duration-300 ease-in-out"
-                                />
-                            </FormControl>
-                            <FormMessage className="text-xs sm:text-sm text-red-500" />
-                        </FormItem>
-                    )}
-                />
-
-                <div className="flex items-center gap-4 mt-2">
-                    <FormField
-                        control={form.control}
-                        name="file_data"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormControl>
-                                    <Input type="file" {...fileRef} />
-                                </FormControl>
-                                <FormMessage className="text-xs sm:text-sm text-red-500" />
-                            </FormItem>
-                        )}
-                    />
-                    <Button className="w-fit" disabled={isSubmitting}>
-                        {isSubmitting ? "Submitting" : "Upload"}
-                    </Button>
-                </div> */}
             </form>
         </Form>
     );
