@@ -7,11 +7,11 @@ export default async function Home() {
     return (
         <main className="flex-1 flex flex-col">
             <div className="container flex-grow">
-                <div className="mx-auto gap-4 flex w-4/5 flex-col justify-center items-center mt-40">
-                    <h1 className="text-5xl font-bold text-center">
+                <div className="mx-auto gap-4 flex w-4/5 flex-col justify-center items-center sm:mt-40 mt-20">
+                    <h1 className="sm:text-5xl text-2xl font-bold text-center">
                         Unlock the Power of AI-Driven Content Analysis
                     </h1>
-                    <h3 className="text-xl">
+                    <h3 className="sm:text-xl text-sm text-center">
                         From information overload to actionable insights in
                         seconds
                     </h3>
