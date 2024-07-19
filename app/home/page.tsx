@@ -13,9 +13,9 @@ export default async function Home() {
         redirect("/");
     }
     return (
-        <section className="flex-1 flex flex-col">
-            <div className="container flex-grow flex justify-center">
-                <div className="my-16 w-full flex items-start gap-3">
+        <section className="h-full">
+            <div className="container flex flex-col h-full">
+                <div className="my-16 flex-grow flex flex-col sm:flex-row items-start gap-6">
                     <DataForm />
                     <Result
                         summary="weffew"
