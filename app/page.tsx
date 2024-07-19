@@ -8,7 +8,12 @@ export default async function Home() {
         <main className="flex-1 flex flex-col">
             <div className="container flex-grow">
                 <div className="mx-auto gap-4 flex w-4/5 flex-col justify-center items-center sm:mt-40 mt-20">
-                    <h1 className="sm:text-5xl text-2xl font-bold text-center">
+                    {session?.user?.username && (
+                        <p className="text-sm sm:text-xl my-2 border rounded-full px-6 py-1">
+                            Welcome 👋 {session?.user?.username}
+                        </p>
+                    )}
+                    <h1 className="sm:text-5xl text-xl font-bold text-center">
                         Unlock the Power of AI-Driven Content Analysis
                     </h1>
                     <h3 className="sm:text-xl text-sm text-center">
