@@ -31,11 +31,11 @@ export function Result({ summary, sentiment, keywords }: ResultProps) {
                 </div>
                 <div className="space-y-2">
                     <h3 className="font-semibold">Keywords</h3>
-                    <div className="font-semibold flex gap-3">
+                    <div className="font-semibold flex gap-3 flex-wrap">
                         {keywords_list?.map((k, index) => (
                             <span
                                 key={index}
-                                className="bg-zinc-800 text-zinc-100 rounded-md px-2 py-1"
+                                className="bg-zinc-800 text-zinc-100 rounded-md px-2 py-1 text-sm"
                             >
                                 {k}
                             </span>
