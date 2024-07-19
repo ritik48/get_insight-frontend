@@ -4,19 +4,15 @@ export async function POST(req: Request, res: Response) {
     try {
         await handleAuth();
 
-        const data = await req.json();
+        const formData = await req.formData();
 
-        // // make request to the express app
-
-        const response = await fetch("http://localhost:4000", {
+        const response = await fetch("http://localhost:4000/data", {
             method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-type": "application/json",
-            },
+            body: formData,
         });
 
         const result = await response.json();
+        console.log(result);
 
         return Response.json({ ...result }, { status: 200 });
     } catch (error) {
