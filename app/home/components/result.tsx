@@ -10,10 +10,10 @@ const keywords = ["country", "jobs", "population", "inflation"];
 
 export function Result({ summary, sentiment, keywords }: ResultProps) {
     return (
-        <div className="flex-1 flex flex-col h-full gap-5">
-            <div className="h-[60%] flex flex-col gap-3">
+        <div className="flex-1 flex flex-col sm:h-full gap-5 w-full sm:w-auto">
+            <div className="h-[200px] sm:h-[60%] flex flex-col gap-3">
                 <h3 className="text-xl font-semibold">Summary</h3>
-                <div className="w-full h-full space-y-2">
+                <div className="w-full h-full">
                     <Textarea
                         className="h-full"
                         readOnly={true}
