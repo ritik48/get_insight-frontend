@@ -1,9 +1,11 @@
 import { Data } from "@/app/_models/data";
+import { connectDb } from "@/lib/db";
 import { handleAuth } from "@/lib/middleware";
 
 export async function DELETE(req: Request, res: Response) {
     try {
         await handleAuth();
+        await connectDb();
 
         const body = await req.json();
         const id = body.id;
