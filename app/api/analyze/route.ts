@@ -1,6 +1,9 @@
 import { Data } from "@/app/_models/data";
 import { connectDb } from "@/lib/db";
+import { getJwtToken } from "@/lib/getJwt";
 import { handleAuth } from "@/lib/middleware";
+
+import bcrypt from "bcrypt";
 
 const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:4000";
 
@@ -19,17 +22,28 @@ export async function POST(req: Request, res: Response) {
             );
         }
 
+        let authToken;
+        try {
+            authToken = await getJwtToken(username);
+        } catch (err) {
+            return Response.json({ success: false }, { status: 500 });
+        }
+
         const response = await fetch(`${BACKEND_URL}/data`, {
             method: "POST",
             body: formData,
+            headers: {
+                authorization: `Bearer ${authToken}`,
+            },
         });
 
         const result = await response.json();
-
-        if (!result.sucess) {
-            return Response.json({ ...result }, { status: response.status });
+        if (!result.success) {
+            return Response.json(
+                { success: false, ...result },
+                { status: response.status }
+            );
         }
-
         const keywords_list = result?.data?.keywords
             ?.split("\n")
             .map((k: string) => {
