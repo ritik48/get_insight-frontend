@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Session } from "next-auth";
 import Logout from "./Logout";
+import { HamMenu } from "./HamMenu";
 
 export default function NavBar({ session }: { session: Session | null }) {
     const isAuthenticated = session?.user?.username;
@@ -11,7 +12,7 @@ export default function NavBar({ session }: { session: Session | null }) {
                     <Link href={"/"} className="text-2xl font-bold">
                         Ai
                     </Link>
-                    <div className="flex items-center gap-6">
+                    <div className="items-center gap-6 sm:flex hidden">
                         {!isAuthenticated ? (
                             <>
                                 <Link
@@ -38,6 +39,9 @@ export default function NavBar({ session }: { session: Session | null }) {
                                 <Logout />
                             </div>
                         )}
+                    </div>
+                    <div className="sm:hidden">
+                        <HamMenu isAuthenticated={isAuthenticated} />
                     </div>
                 </div>
             </div>
