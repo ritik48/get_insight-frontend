@@ -25,7 +25,7 @@ export function DataForm({
 }: {
     setResult: React.Dispatch<
         React.SetStateAction<
-            | { summary?: string; sentiment?: string; keywords?: string }
+            | { summary?: string; sentiment?: string; keywords?: string[] }
             | undefined
         >
     >;
@@ -58,17 +58,14 @@ export function DataForm({
         if (!data.success) {
             toast.error(data.message || "Something went wrong");
         } else {
-            setResult(data.data);
+            setResult({ ...data.data, keywords: data.keywords });
             form.reset();
         }
     };
     const fileRef = form.register("file_data");
     return (
         <Form {...form}>
-            <form
-                className="h-[250px] sm:h-full sm:flex-1 flex flex-col w-full sm:w-auto"
-                onSubmit={form.handleSubmit(onSubmit)}
-            >
+            <form className="" onSubmit={form.handleSubmit(onSubmit)}>
                 <FormField
                     control={form.control}
                     name="type_of_data"
@@ -120,14 +117,14 @@ export function DataForm({
                         control={form.control}
                         name="text"
                         render={({ field }) => (
-                            <FormItem className="h-full sm:h-[60%] flex flex-col gap-1 mt-5">
+                            <FormItem className="flex flex-col gap-1 mt-5">
                                 <FormLabel className="text-sm sm:text-xl font-semibold text-foreground">
                                     Write text or upload file to analyse
                                 </FormLabel>
                                 <FormControl>
                                     <Textarea
                                         {...field}
-                                        className="transition-all w-full h-full duration-300 ease-in-out"
+                                        className="transition-all w-full h-[200px] duration-300 ease-in-out"
                                     />
                                 </FormControl>
                                 <FormMessage className="text-xs sm:text-sm text-red-500" />
