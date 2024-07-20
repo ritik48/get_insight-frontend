@@ -38,12 +38,14 @@ export default function Signin() {
     return (
         <section className="flex-1 flex flex-col">
             <div className="container flex-grow">
-                <div className="mx-auto sm:w-96 w-[98%] bg-slate-100 rounded-xl p-8 gap-4 flex flex-col sm:mt-40 mt-20">
+                <div className="mx-auto sm:w-96 w-[98%] bg-slate-100 rounded-xl p-7 sm:p-8 gap-4 flex flex-col sm:mt-40 mt-20">
                     <div className="text-center">
-                        <h2 className="text-xl font-bold">
+                        <p className="text-xs">
+                            Test: (user: test, password: 123)
+                        </p>
+                        <h2 className="text-lg sm:text-xl font-bold">
                             Login to your account
                         </h2>
-                        <p>Enter your username and password</p>
                     </div>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>

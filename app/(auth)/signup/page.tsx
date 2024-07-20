@@ -55,7 +55,6 @@ export default function Signup() {
                 <div className="mx-auto sm:w-96 w-[98%] bg-slate-100 rounded-xl p-8 gap-4 flex flex-col sm:mt-40 mt-20">
                     <div className="text-center">
                         <h2 className="text-xl font-bold">Create an account</h2>
-                        <p>Enter your username and password</p>
                     </div>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>
