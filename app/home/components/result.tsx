@@ -13,12 +13,14 @@ export function Result({ summary, sentiment, keywords }: ResultProps) {
     return (
         <div className="flex flex-col gap-5 mb-8">
             <div className="max-h-[400px] flex flex-col gap-3">
-                <h3 className="text-xl font-semibold">Summary</h3>
+                <h3 className="text-lg sm:text-xl font-semibold">Summary</h3>
 
-                <div className="border rounded-md p-4">{summary}</div>
+                <div className="border rounded-md p-4 text-[16px] overflow-y-auto">
+                    {summary}
+                </div>
             </div>
             <div className="flex flex-col gap-5">
-                <div>
+                <div className="space-y-1">
                     <h3 className="font-semibold">Sentiment</h3>
                     <div
                         className={`${
@@ -29,14 +31,14 @@ export function Result({ summary, sentiment, keywords }: ResultProps) {
                                 : senti === "neutral"
                                 ? "bg-yellow-500"
                                 : "bg-none"
-                        } w-fit px-3 py-1 rounded-md text-zinc-100 font-semibold`}
+                        } w-fit px-2 py-0.5 rounded-md text-zinc-100 font-medium`}
                     >
                         {sentiment}
                     </div>
                 </div>
                 <div className="space-y-2">
                     <h3 className="font-semibold">Keywords</h3>
-                    <div className="font-semibold flex gap-3 flex-wrap">
+                    <div className="font-light flex gap-2 flex-wrap">
                         {keywords?.map((k: string, index: number) => (
                             <span
                                 key={index}

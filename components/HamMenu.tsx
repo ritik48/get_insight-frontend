@@ -26,7 +26,7 @@ export function HamMenu({
             <DropdownMenuTrigger>
                 <IoIosMenu size={24} />
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent className="mr-2">
                 {isAuthenticated ? (
                     <>
                         <DropdownMenuItem asChild>

@@ -9,9 +9,27 @@ export default function NavBar({ session }: { session: Session | null }) {
         <nav>
             <div className="container">
                 <div className="flex items-center justify-between py-2">
-                    <Link href={"/"} className="text-2xl font-bold">
-                        Ai
-                    </Link>
+                    <div className="flex gap-10">
+                        <Link href={"/"} className="text-2xl font-bold">
+                            Ai
+                        </Link>
+                        {isAuthenticated && (
+                            <div className="sm:flex gap-4 hidden">
+                                <Link
+                                    href={"/home"}
+                                    className="text-sm border px-2 py-1 rounded-md hover:bg-accent"
+                                >
+                                    Analyze Data
+                                </Link>
+                                <Link
+                                    href={"/dashboard"}
+                                    className="text-sm border px-2 py-1 rounded-md hover:bg-accent"
+                                >
+                                    Dashboard
+                                </Link>
+                            </div>
+                        )}
+                    </div>
                     <div className="items-center gap-6 sm:flex hidden">
                         {!isAuthenticated ? (
                             <>
@@ -30,12 +48,6 @@ export default function NavBar({ session }: { session: Session | null }) {
                             </>
                         ) : (
                             <div className="flex gap-6 items-center">
-                                <Link
-                                    href={"/dashboard"}
-                                    className="text-sm border px-2 py-1 rounded-md hover:bg-accent"
-                                >
-                                    Dashboard
-                                </Link>
                                 <Logout />
                             </div>
                         )}
