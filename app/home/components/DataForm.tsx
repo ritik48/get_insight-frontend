@@ -59,7 +59,7 @@ export function DataForm({
             toast.error(data.message || "Something went wrong");
         } else {
             setResult({ ...data.data, keywords: data.keywords });
-            form.reset();
+            form.reset({ type_of_data: values.type_of_data });
         }
     };
     const fileRef = form.register("file_data");
