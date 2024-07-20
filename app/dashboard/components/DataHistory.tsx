@@ -44,7 +44,7 @@ export function DataHistory({ userData }: { userData: DataDocument[] }) {
                 </div>
             )}
             {userData.length > 0 && (
-                <table className="w-full min-w-[500px]">
+                <table className="w-full min-w-[400px]">
                     <tr className="grid text-left py-3 border-b grid-cols-[0.1fr_0.4fr_0.4fr_0.1fr] font-semibold">
                         <th className="sm:text-[16px] text-sm font-medium">
                             Type
@@ -75,7 +75,7 @@ export function DataHistory({ userData }: { userData: DataDocument[] }) {
                                 >
                                     {data?.data_type}
                                 </td>
-                                <td>
+                                <td className="text-sm mx-2">
                                     {data.data_type === "file" ? (
                                         <Link
                                             href={data.url}
@@ -90,7 +90,14 @@ export function DataHistory({ userData }: { userData: DataDocument[] }) {
                                     )}
                                 </td>
                                 <td className="sm:text-sm text-xs text-gray-600">
-                                    {data?.createdAt.toISOString()}
+                                    <div className="flex sm:flex-row flex-col gap-2 sm:gap-4">
+                                        <div>
+                                            {data?.createdAt.toDateString()}
+                                        </div>
+                                        <div>
+                                            {data?.createdAt.toLocaleTimeString()}
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>
                                     <MdDeleteOutline

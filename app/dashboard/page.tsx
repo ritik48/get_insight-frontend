@@ -17,6 +17,7 @@ export default async function Dashboard() {
         <section className="mt-5">
             <div className="container space-y-2">
                 <h1 className="text-xl font-bold">Dashboard</h1>
+                <p className="text-sm text-zinc-600">Total : {userDataHistory?.data?.length} results</p>
                 <DataHistory userData={userDataHistory.data} />
             </div>
         </section>

@@ -11,7 +11,7 @@ const keywords = ["country", "jobs", "population", "inflation"];
 export function Result({ summary, sentiment, keywords }: ResultProps) {
     const senti = sentiment?.toLowerCase();
     return (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 mb-8">
             <div className="max-h-[400px] flex flex-col gap-3">
                 <h3 className="text-xl font-semibold">Summary</h3>
 
