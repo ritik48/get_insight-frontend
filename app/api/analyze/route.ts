@@ -11,12 +11,24 @@ export async function POST(req: Request, res: Response) {
 
         const formData = await req.formData();
 
+        const file = formData.get("file_data");
+        if (file instanceof File && file?.size > 1024 * 1024) {
+            return Response.json(
+                { success: false, message: "File size must be 1MB or less" },
+                { status: 400 }
+            );
+        }
+
         const response = await fetch(`${BACKEND_URL}/data`, {
             method: "POST",
             body: formData,
         });
 
         const result = await response.json();
+
+        if (!result.sucess) {
+            return Response.json({ ...result }, { status: response.status });
+        }
 
         const keywords_list = result?.data?.keywords
             ?.split("\n")
