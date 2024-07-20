@@ -9,7 +9,10 @@ type ResultProps = {
 const keywords = ["country", "jobs", "population", "inflation"];
 
 export function Result({ summary, sentiment, keywords }: ResultProps) {
-    const keywords_list = keywords?.split("\n").map((k) => k.slice(2));
+    const keywords_list = keywords?.split("\n").map((k) => {
+        const parts = k.trim().split("-");
+        return parts.length > 1 && parts[0] === "" ? parts[1].trim() : k.trim();
+    });
 
     return (
         <div className="flex-1 flex flex-col sm:h-full gap-5 w-full sm:w-auto">
