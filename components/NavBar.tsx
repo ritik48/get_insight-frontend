@@ -28,7 +28,15 @@ export default function NavBar({ session }: { session: Session | null }) {
                                 </Link>
                             </>
                         ) : (
-                            <Logout />
+                            <div className="flex gap-6 items-center">
+                                <Link
+                                    href={"/dashboard"}
+                                    className="text-sm border px-2 py-1 rounded-md hover:bg-accent"
+                                >
+                                    Dashboard
+                                </Link>
+                                <Logout />
+                            </div>
                         )}
                     </div>
                 </div>
