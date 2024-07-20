@@ -40,8 +40,11 @@ export async function POST(req: Request, res: Response) {
 
         await Data.create({ ...data_to_save });
 
-        return Response.json({ ...result }, { status: 200 });
+        return Response.json(
+            { ...result, keywords: keywords_list },
+            { status: 200 }
+        );
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 }
