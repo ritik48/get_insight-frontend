@@ -57,7 +57,10 @@ export function DataForm({
 
         if (!data.success) {
             toast.error(data.message || "Something went wrong");
-        } else setResult(data.data);
+        } else {
+            setResult(data.data);
+            form.reset();
+        }
     };
     const fileRef = form.register("file_data");
     return (
