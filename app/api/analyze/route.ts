@@ -15,6 +15,17 @@ export async function POST(req: Request, res: Response) {
         const formData = await req.formData();
 
         const file = formData.get("file_data");
+
+        if (!formData.get("text") && !file) {
+            return Response.json(
+                {
+                    success: false,
+                    message: "Provide valid text or file",
+                },
+                { status: 400 }
+            );
+        }
+
         if (file instanceof File && file?.size > 1024 * 1024) {
             return Response.json(
                 { success: false, message: "File size must be 1MB or less" },
@@ -71,6 +82,7 @@ export async function POST(req: Request, res: Response) {
             { status: 200 }
         );
     } catch (error) {
-        throw error;
+        console.log(error);
+        return Response.json({ success: false }, { status: 500 });
     }
 }
