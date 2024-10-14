@@ -12,7 +12,10 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 const userSchema = z.object({
@@ -32,8 +35,20 @@ export default function Signin() {
             ...values,
             callbackUrl: "/home",
         });
-        console.log(res);
     };
+
+    const searchParams = useSearchParams();
+    const err = searchParams.get("error");
+  
+    useEffect(() => {
+        if (!err) return;
+  
+        if (err === "CredentialsSignin") {
+            toast.error("Invalid credentials");
+        }   else {
+            toast.error("Something went wrong");
+        }
+    }, [err]);
 
     return (
         <section className="flex-1 flex flex-col">
