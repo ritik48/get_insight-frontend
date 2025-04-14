@@ -7,16 +7,16 @@ export default async function Home() {
     return (
         <main className="flex-1 flex flex-col">
             <div className="container flex-grow">
-                <div className="mx-auto gap-4 flex w-4/5 flex-col justify-center items-center sm:mt-40 mt-20">
+                <div className="mx-auto gap-4 flex sm:w-[65%] flex-col justify-center items-center sm:mt-40 mt-20">
                     {session?.user?.username && (
-                        <p className="text-sm sm:text-xl my-2 border rounded-full px-6 py-1">
+                        <p className="text-sm sm:text-lg my-2 border rounded-full px-6 py-1">
                             Welcome 👋 {session?.user?.username}
                         </p>
                     )}
                     <h1 className="sm:text-5xl text-xl font-bold text-center">
                         Unlock the Power of AI-Driven Content Analysis
                     </h1>
-                    <h3 className="sm:text-xl text-sm text-center">
+                    <h3 className="sm:text-lg text-gray-700 text-sm text-center">
                         From information overload to actionable insights in
                         seconds
                     </h3>
