@@ -28,10 +28,10 @@ export default async function RootLayout({
                     {children}
                 </Provider>
                 <Toaster />
-                <a href="https://github.com/ritik48/get_insight-frontend" target="_blank" className="absolute bottom-0 left-0 border-orange-300 flex items-center gap-1 m-3 border rounded-lg p-2">
+{/*                 <a href="https://github.com/ritik48/get_insight-frontend" target="_blank" className="absolute bottom-0 left-0 border-orange-300 flex items-center gap-1 m-3 border rounded-lg p-2">
                     <img src="/github.png" className="bg-white w-6" />
                     <span className="font-bold text-xs">Source Code</span>
-                </a>
+                </a> */}
             </body>
         </html>
     );
